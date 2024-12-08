@@ -1,8 +1,17 @@
 import { v2 as cloudinary } from "cloudinary";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import { Buffer } from "buffer";
 
 // Configuration
+if (
+  !process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME ||
+  !process.env.CLOUDINARY_API_KEY ||
+  !process.env.CLOUDINARY_API_SECRET
+) {
+  throw new Error("Cloudinary environment variables are not set");
+}
+
 cloudinary.config({
   cloud_name: process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -12,7 +21,7 @@ cloudinary.config({
 // Cloudinary upload result interface definition
 interface CloudinaryUploadResult {
   public_id: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export async function POST(req: NextRequest) {
@@ -34,9 +43,7 @@ export async function POST(req: NextRequest) {
 
     // Upload the image to Cloudinary
     const bytes = await file.arrayBuffer();
-    // Convert the ArrayBuffer to a Buffer
     const buffer = Buffer.from(bytes);
-
     const result = await new Promise<CloudinaryUploadResult>(
       (resolve, reject) => {
         const uploadStream = cloudinary.uploader.upload_stream(
@@ -44,7 +51,9 @@ export async function POST(req: NextRequest) {
           (error, result) => {
             if (error) {
               reject(error);
-            } else resolve(result as CloudinaryUploadResult);
+            } else {
+              resolve(result as CloudinaryUploadResult);
+            }
           }
         );
         uploadStream.end(buffer);
