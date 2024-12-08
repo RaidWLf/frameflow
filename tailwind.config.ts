@@ -14,5 +14,9 @@ export default {
       },
     },
   },
-  plugins: [],
+
+  // Add your plugins, themes, settings, and variants here
+  // Added daisyUI plugin here to enable dark mode support in the project using daisyUI plugin
+  plugins: [require("daisyui")],
+  daisyui: { themes: ["dark"] },
 } satisfies Config;
