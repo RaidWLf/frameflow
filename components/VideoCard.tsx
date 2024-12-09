@@ -96,6 +96,8 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
           <Image
             src={getThumbnailUrl(video.publicId)}
             alt={video.title}
+            width={400}
+            height={225}
             className="w-full h-full object-cover"
           />
         )}
@@ -133,14 +135,17 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             Compression:{" "}
             <span className="text-accent">{compressionPercentage}%</span>
           </div>
-          <button
+          <a
+            href={getFullVideoUrl(video.publicId)}
+            download={video.title}
             className="btn btn-primary btn-sm"
-            onClick={() =>
-              onDownload(getFullVideoUrl(video.publicId), video.title)
-            }
+            onClick={(e) => {
+              e.preventDefault();
+              onDownload(getFullVideoUrl(video.publicId), video.title);
+            }}
           >
             <Download size={16} />
-          </button>
+          </a>
         </div>
       </div>
     </div>
