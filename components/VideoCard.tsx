@@ -135,17 +135,27 @@ const VideoCard: React.FC<VideoCardProps> = ({ video, onDownload }) => {
             Compression:{" "}
             <span className="text-accent">{compressionPercentage}%</span>
           </div>
-          <a
-            href={getFullVideoUrl(video.publicId)}
-            download={video.title}
-            className="btn btn-primary btn-sm"
-            onClick={(e) => {
-              e.preventDefault();
-              onDownload(getFullVideoUrl(video.publicId), video.title);
-            }}
-          >
-            <Download size={16} />
-          </a>
+          <div className="flex space-x-2">
+            <a
+              href={getFullVideoUrl(video.publicId)}
+              download={video.title}
+              className="btn btn-primary btn-sm"
+              onClick={(e) => {
+                e.preventDefault();
+                onDownload(getFullVideoUrl(video.publicId), video.title);
+              }}
+            >
+              <Download size={16} />
+            </a>
+            <a
+              href={getFullVideoUrl(video.publicId)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-secondary btn-sm"
+            >
+              Play
+            </a>
+          </div>
         </div>
       </div>
     </div>

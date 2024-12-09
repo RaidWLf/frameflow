@@ -5,12 +5,14 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  transition: background 0.3s, color 0.3s;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #e0e0e0;
+    transition: background 0.3s, color 0.3s;
   }
 }
 
