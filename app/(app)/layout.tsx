@@ -48,9 +48,9 @@ export default function AppLayout({
         checked={sidebarOpen}
         onChange={() => setSidebarOpen(!sidebarOpen)}
       />
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col bg-gray-100 dark:bg-gray-900">
         {/* Navbar */}
-        <header className="w-full bg-base-200">
+        <header className="w-full bg-white dark:bg-gray-800 shadow">
           <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex-none lg:hidden">
               <label
@@ -62,7 +62,7 @@ export default function AppLayout({
             </div>
             <div className="flex-1">
               <Link href="/" onClick={handleLogoClick}>
-                <div className="btn btn-ghost normal-case text-2xl font-bold tracking-tight cursor-pointer">
+                <div className="btn btn-ghost normal-case text-2xl font-bold tracking-tight cursor-pointer text-gray-900 dark:text-gray-100">
                   Cloudinary Showcase
                 </div>
               </Link>
@@ -77,17 +77,18 @@ export default function AppLayout({
                         alt={
                           user.username || user.emailAddresses[0].emailAddress
                         }
+                        className="rounded-full"
                       />
                     </div>
                   </div>
-                  <span className="text-sm truncate max-w-xs lg:max-w-md">
+                  <span className="text-sm truncate max-w-xs lg:max-w-md text-gray-900 dark:text-gray-100">
                     {user.username || user.emailAddresses[0].emailAddress}
                   </span>
                   <button
                     onClick={handleSignOut}
                     className="btn btn-ghost btn-circle"
                   >
-                    <LogOutIcon className="h-6 w-6" />
+                    <LogOutIcon className="h-6 w-6 text-gray-900 dark:text-gray-100" />
                   </button>
                 </>
               )}
@@ -103,7 +104,7 @@ export default function AppLayout({
       </div>
       <div className="drawer-side">
         <label htmlFor="sidebar-drawer" className="drawer-overlay"></label>
-        <aside className="bg-base-200 w-64 h-full flex flex-col">
+        <aside className="bg-white dark:bg-gray-800 w-64 h-full flex flex-col shadow-lg">
           <div className="flex items-center justify-center py-4">
             <ImageIcon className="w-10 h-10 text-primary" />
           </div>
@@ -115,12 +116,14 @@ export default function AppLayout({
                   className={`flex items-center space-x-4 px-4 py-2 rounded-lg ${
                     pathname === item.href
                       ? "bg-primary text-white"
-                      : "hover:bg-base-300"
+                      : "hover:bg-gray-200 dark:hover:bg-gray-700"
                   }`}
                   onClick={() => setSidebarOpen(false)}
                 >
-                  <item.icon className="w-6 h-6" />
-                  <span>{item.label}</span>
+                  <item.icon className="w-6 h-6 text-gray-900 dark:text-gray-100" />
+                  <span className="text-gray-900 dark:text-gray-100">
+                    {item.label}
+                  </span>
                 </Link>
               </li>
             ))}
