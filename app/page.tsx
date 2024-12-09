@@ -1,3 +1,14 @@
-import Home from "./(app)/home/page";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
-export default Home;
+const Page = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.push("/home");
+  }, [router]);
+
+  return null;
+};
+
+export default Page;
