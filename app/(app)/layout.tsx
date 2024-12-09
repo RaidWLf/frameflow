@@ -50,7 +50,7 @@ export default function AppLayout({
       />
       <div className="drawer-content flex flex-col bg-gray-100 dark:bg-gray-900">
         {/* Navbar */}
-        <header className="w-full bg-white dark:bg-gray-800 shadow">
+        <header className="w-full bg-white dark:bg-gray-800 shadow-md">
           <div className="navbar max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex-none lg:hidden">
               <label
@@ -60,10 +60,12 @@ export default function AppLayout({
                 <MenuIcon />
               </label>
             </div>
-            <div className="flex-1">
+            <div className="flex-1 flex items-center">
               <Link href="/" onClick={handleLogoClick}>
-                <div className="btn btn-ghost normal-case text-2xl font-bold tracking-tight cursor-pointer text-gray-900 dark:text-gray-100">
-                  Cloudinary Showcase
+                <div className="flex items-center space-x-2 cursor-pointer">
+                  <span className="btn btn-ghost normal-case text-xl lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100">
+                    Frame Flow
+                  </span>
                 </div>
               </Link>
             </div>
@@ -71,19 +73,18 @@ export default function AppLayout({
               {user && (
                 <>
                   <div className="avatar">
-                    <div className="w-8 h-8 rounded-full">
+                    <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-full">
                       <Image
                         src={user.imageUrl}
                         alt={
                           user.username || user.emailAddresses[0].emailAddress
                         }
                         className="rounded-full"
+                        width={40}
+                        height={40}
                       />
                     </div>
                   </div>
-                  <span className="text-sm truncate max-w-xs lg:max-w-md text-gray-900 dark:text-gray-100">
-                    {user.username || user.emailAddresses[0].emailAddress}
-                  </span>
                   <button
                     onClick={handleSignOut}
                     className="btn btn-ghost btn-circle"
